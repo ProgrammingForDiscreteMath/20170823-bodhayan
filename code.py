@@ -18,10 +18,10 @@ def entries_less_than_ten(L):
     Returns:
         A sublist of L consisting of those entries which are less than 10.
     """
-    return #Add your code here
+    return [i for i in L if i < 10]#Add your code here
 
 #Test
-#print entries_less_than_ten([2, 13, 4, 66, -5]) == [2, 4, 6, -5]
+#print entries_less_than_ten([2, 13, 4, 6, -5]) == [2, 4, 6, -5]
 
 # 2
 
@@ -35,7 +35,7 @@ def number_of_negatives(L):
     Returns:
         number of entries of L which are negative
     """
-    pass ##YOUR CODE REPLACES THIS
+    return sum(i<0 for i in L)##YOUR CODE REPLACES THIS
 
 # TEST
 #print number_of_negatives([2, -1, 3, 0, -1, 0, -45, 21]) == 3
@@ -53,10 +53,10 @@ def common_elements(L1, L2):
         A list whose elements are the common elements of ``L1`` and
         ``L2`` WITHOUT DUPLICATES.
     """
-    pass # your code goes here
+    return list(set(L1).intersection(L2)) # your code goes here
 
 #TEST
-#common_elements([1, 2, 1, 4, "bio", 6, 1], [4, 4, 2, 1, 3, 5]) == [1, 2, 4]
+#print common_elements([1, 2, 1, 4, "bio", 6, 1], [4, 4, 2, 1, 3, 5]) == [1, 2, 4]
 
 #4
 def fibonacci_generator():
@@ -66,34 +66,53 @@ def fibonacci_generator():
     The Fibonacci sequence 1, 1, 2, 3, 5, 8, 13, 21,...
     is defined by a1=1, a2=1, and an = a(n-1) + a(n-2).
     """
-    pass # Hint: use the ``yield`` command.
+    i,j=1,1
+    while True:
+        yield i
+        i,j=j,i+j# Hint: use the ``yield`` command.
 
 #TEST
-#f = fibonacci()
-#[f.next() for f in range(10)] == [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
+f = fibonacci_generator()
+#print f.next(),f.next(),f.next(),f.next(),f.next(),f.next(),f.next(),f.next(),f.next(),f.next()
+#[f.next() for f in range(10)] #== [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
 
 #5
 def largest_fibonacci_before(n):
     """
     Return the largest Fibonacci number less than ``n``.
     """
-    pass #Your code goes here.
+    f=fibonacci_generator()
+    i=f.next()
+    j=f.next()
+    while j<n:
+        i=j
+        j=f.next() #Your code goes here.
+    return i
 
 #TEST
-#largest-fibonacci_before(55) == 34
+#print largest_fibonacci_before(55) == 34
 
 #6
+def fact(n):
+    if n==0:
+        return 1
+    else:
+        return n*fact(n-1)
+
 def catalan_generator():
     """
     Generate the sequence of Catalan numbers.
 
     For the definition of the Catalan number sequence see `OEIS <https://www.oeis.org/A000108>`.
     """
-    pass #Your code goes here.
+    i=0
+    while True:
+        yield fact(2*i)/(fact(i)*fact(i+1))#Your code goes here.
+        i+=1
 
 #TEST
 #c = catalan_generator()
-#[c.next() for i in range(10)] == [1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862]
+#print [c.next() for i in range(10)] #== [1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862]
 
     
     
